@@ -95,11 +95,11 @@ for(const path of ['/','/style.css','/health','/privacy-policy','/terms']) {
   assert.equal(response.headers.get('x-content-type-options'),'nosniff');
   cases.push({label:'public surface '+path,passed:true,httpStatus:response.status});
 }
-const archive=await fetch('https://mcp.aperi.io/downloads/aperi-market-research-0.1.0.zip',{redirect:'manual'});
+const archive=await fetch('https://mcp.aperi.io/downloads/aperi-market-research-0.1.1.zip',{redirect:'manual'});
 assert.equal(archive.status,200);
 const bytes=Buffer.from(await archive.arrayBuffer());
 const zipSha256=createHash('sha256').update(bytes).digest('hex');
-assert.equal(zipSha256,'c54ca8101c02836a88cf2ed8a85184c79011a08b5578a214b4e28b7e3ffb744f');
+assert.equal(zipSha256,'6779e60aac9755407897ca1cac7c9dffe892b576e90fd5e39ddf3f262f2e26b9');
 cases.push({label:'live plugin archive matches reviewed package',passed:true,bytes:bytes.length,sha256:zipSha256});
 const receipt={observedAt:new Date().toISOString(),endpoint:endpoint.href,passed:true,caseCount:cases.length,toolCount:16,referenceOperationCount:180,cases,wire,financialActions:0,credentialsUsed:false,syntheticPublicWallet:syntheticWallet,automaticMutationRetry:false};
 await mkdir(evidence,{recursive:true});

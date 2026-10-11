@@ -1,9 +1,10 @@
 {
   "name": "aperi-market-research",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Research Aperi perpetual markets, inspect public account observations, and understand the documented Aperi API.",
   "author": {
     "name": "Aperi",
+    "email": "info@aperi.trade",
     "url": "https://aperi.io"
   },
   "homepage": "https://aperi.io/api",

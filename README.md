@@ -56,6 +56,10 @@ the skills on supported hosts.
 [Support](https://aperi.io/support).
 
 Direct GitHub installation is separate from official directory approval.
+Publisher contact: `info@aperi.trade`. Mailbox activation and delivery remain
+pending verification; use [Aperi Support](https://aperi.io/support) for current
+support.
+
 The new plugin instructions and packaging are [MIT licensed](plugins/aperi/LICENSE).
 The standalone public MCP server is separately [MIT licensed](packages/mcp-server/LICENSE).
 Existing platform code, third-party services and Aperi trademarks are outside

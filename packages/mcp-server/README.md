@@ -35,7 +35,7 @@ Before building the hosted Worker, generate and stage its public download asset 
 ```sh
 node plugins/aperi/scripts/package.mjs --output /tmp/aperi-plugin-artifacts
 mkdir -p packages/mcp-server/public/downloads
-cp /tmp/aperi-plugin-artifacts/aperi-market-research-0.1.0.zip packages/mcp-server/public/downloads/
+cp /tmp/aperi-plugin-artifacts/aperi-market-research-0.1.1.zip packages/mcp-server/public/downloads/
 ```
 
 Runtime verification uses isolated Workerd, mocked public API responses and no customer data. Live release tests are separate. Configuration targets the dedicated `aperi-mcp` Worker at `mcp.aperi.io`; it does not deploy the trading application. Forks must replace the account, worker, domain and abuse-budget configuration before deploying their own service. Marketplace publication and approval follow the [official submission process](https://developers.openai.com/plugins/deploy/submission).

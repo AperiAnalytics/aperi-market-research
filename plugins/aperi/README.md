@@ -1,6 +1,6 @@
 # Aperi Market Research
 
-Version `0.1.0` bundles four skills with the public Aperi MCP connection at
+Version `0.1.1` bundles four skills with the public Aperi MCP connection at
 `https://mcp.aperi.io/mcp`. The connection uses Streamable HTTP and no
 authentication. No local server, wallet connection or API key is needed.
 
@@ -90,6 +90,10 @@ demo recording. Official approval cannot be inferred from local validation or
 successful live MCP tests. The [public plugin repository](https://github.com/AperiAnalytics/aperi-market-research)
 provides direct installation; publisher verification, submission contact,
 review materials and each directory's approval remain separate steps.
+
+Publisher contact: `info@aperi.trade`. Mailbox activation and email delivery
+are pending verification. Current support remains available through
+[Aperi Support](https://aperi.io/support).
 
 The new plugin instructions and packaging are MIT licensed. Existing platform
 code, third-party data and Aperi trademarks are outside that license.

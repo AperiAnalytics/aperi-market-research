@@ -1,10 +1,12 @@
 {
   "name": "@aperi/mcp-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "description": "Aperi public market research MCP server",
-  "engines": { "node": ">=24" },
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "start": "node src/stdio.ts",
     "test": "node --test tests/*.test.ts",

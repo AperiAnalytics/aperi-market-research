@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { AperiPublicClient, ApiFailure, INTERVALS, PUBLIC_OPERATIONS, type ApiParams, type PublicOperation } from './client.ts';
 import operations from '../reference/operations.json' with { type: 'json' };
 
-export const SERVER_VERSION = '0.1.0';
+export const SERVER_VERSION = '0.1.1';
 const nativeId = z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,159}$/).refine(value => !value.includes('..') && !value.startsWith('aperi_market_') && !/^0x[a-fA-F0-9]{64}$/.test(value), 'Use the exact ID from Aperi discovery, without credentials or path segments.');
 const marketInput = z.object({ marketId: nativeId.describe('Exact native market ID from aperi_list_markets, e.g. hyperliquid.xyz.NVDA.USDC.') }).strict();
 const empty = z.object({}).strict();
