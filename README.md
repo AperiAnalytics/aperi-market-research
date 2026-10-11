@@ -3,7 +3,7 @@
 Public, read-only Aperi market research tools and four packaged skills for
 Claude Code, Codex and compatible MCP clients.
 
-MCP endpoint: `https://mcp.aperi.io/mcp` (Streamable HTTP, no authentication).
+MCP endpoint: `https://mcp.aperi.trade/mcp` (Streamable HTTP, no authentication).
 No API key, wallet connection or local server is needed. The plugin reads
 market data and explicitly requested public account observations; it does
 not access private accounts, save watchlists, manage keys, sign consent,
@@ -44,20 +44,20 @@ received that approval; a normal ChatGPT web file upload does not install it.
 
 ## Custom remote connection
 
-Add `https://mcp.aperi.io/mcp` in the client's custom MCP connection settings
+Add `https://mcp.aperi.trade/mcp` in the client's custom MCP connection settings
 with no authentication. This supplies tools; plugin installation also supplies
 the skills on supported hosts.
 
 [Package details and local development](plugins/aperi/README.md) ·
 [Reviewed public server source](packages/mcp-server/README.md) ·
-[Aperi API](https://aperi.io/api) ·
-[Privacy](https://mcp.aperi.io/privacy-policy) ·
-[Terms](https://mcp.aperi.io/terms) ·
-[Support](https://aperi.io/support).
+[Aperi API](https://aperi.trade/api) ·
+[Privacy](https://mcp.aperi.trade/privacy-policy) ·
+[Terms](https://mcp.aperi.trade/terms) ·
+[Support](https://aperi.trade/support).
 
 Direct GitHub installation is separate from official directory approval.
 Publisher contact: `info@aperi.trade`. Mailbox activation and delivery remain
-pending verification; use [Aperi Support](https://aperi.io/support) for current
+pending verification; use [Aperi Support](https://aperi.trade/support) for current
 support.
 
 The new plugin instructions and packaging are [MIT licensed](plugins/aperi/LICENSE).

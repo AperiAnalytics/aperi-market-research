@@ -3,7 +3,7 @@
   "mcpServers": {
     "aperi": {
       "type": "streamable-http",
-      "url": "https://mcp.aperi.io/mcp"
+      "url": "https://mcp.aperi.trade/mcp"
     }
   }
 }

@@ -1,13 +1,13 @@
 {
   "name": "aperi-market-research",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Research Aperi perpetual markets, inspect public account observations, and understand the documented Aperi API.",
   "author": {
     "name": "Aperi",
     "email": "info@aperi.trade",
-    "url": "https://aperi.io"
+    "url": "https://aperi.trade"
   },
-  "homepage": "https://aperi.io/api",
+  "homepage": "https://aperi.trade/api",
   "repository": "https://github.com/AperiAnalytics/aperi-market-research",
   "license": "MIT",
   "keywords": ["markets", "perpetuals", "research", "market-data", "api"]

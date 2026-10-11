@@ -8,7 +8,7 @@ import type { Env } from '../src/worker.ts';
 
 const MARKET = 'hyperliquid.xyz.NVDA.USDC';
 const SOURCE_MS = 1791742930089;
-const ENDPOINT = 'https://mcp.aperi.io/mcp';
+const ENDPOINT = 'https://mcp.aperi.trade/mcp';
 const REQUEST_ID = '5493d5e3-bca6-4284-8a53-e1ac581d7eae';
 type Mode = 'legacy' | 'modern';
 type Trace = { method: string; rpcMethod?: string; protocol?: string | null; session?: string | null; status: number; responseSession: string | null; body?: Record<string, unknown> };
@@ -22,7 +22,7 @@ function fixture() {
   const status = { schemaVersion: '1', status: 'ok', financialAuthority: false, liveTradingQualified: false, protectedGatewaysConfigured: { trading: false, funding: false, ostium: false } };
   const api = new AperiPublicClient({ fetch: async input => {
     const url = new URL(String(input));
-    assert.equal(url.origin, 'https://aperi.io');
+    assert.equal(url.origin, 'https://aperi.trade');
     upstream.push(url.href);
     let data: unknown;
     let code = 200;
@@ -51,7 +51,7 @@ function fixture() {
   const mockFetch: typeof fetch = async (input, init) => {
     const incoming = new Request(input, init);
     const headers = new Headers(incoming.headers);
-    headers.set('host', 'mcp.aperi.io');
+    headers.set('host', 'mcp.aperi.trade');
     headers.set('cf-connecting-ip', '203.0.113.10');
     const request = new Request(incoming, { headers });
     let body: Record<string, unknown> | undefined;

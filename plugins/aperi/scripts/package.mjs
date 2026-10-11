@@ -110,7 +110,7 @@ for (const [name, files] of [
   artifacts.push({ name, bytes: data.length, sha256: createHash('sha256').update(data).digest('hex'), files: files.length });
 }
 const receipt = {
-  plugin: manifest.name, version: manifest.version, endpoint: 'https://mcp.aperi.io/mcp',
+  plugin: manifest.name, version: manifest.version, endpoint: 'https://mcp.aperi.trade/mcp',
   formats: ['Agent Plugins 1.0.0', 'Claude Code compatibility'],
   authentication: 'none', publicDirectoryApproval: 'not-submitted', artifacts,
   files: packageFiles.map(file => ({ path: file.path, bytes: file.data.length, sha256: createHash('sha256').update(file.data).digest('hex') }))

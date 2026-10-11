@@ -4,7 +4,7 @@ export default defineConfig({
   accountId:'95954b4a76db9d1eec8c4080deed4730',
   worker:{
     name:'aperi-mcp',entrypoint,compatibilityDate:'2026-10-11',workersDev:false,
-    domains:['mcp.aperi.io'],limits:{cpuMs:1000},
+    domains:['mcp.aperi.trade'],limits:{cpuMs:1000},
     assets:{runWorkerFirst:true},
     observability:{enabled:true,redactQueryString:true},
     env:{

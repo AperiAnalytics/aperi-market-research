@@ -1,14 +1,14 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "aperi-market-research",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Research Aperi perpetual markets, inspect public account observations, and understand the documented Aperi API.",
   "author": {
     "name": "Aperi",
     "email": "info@aperi.trade",
-    "url": "https://aperi.io"
+    "url": "https://aperi.trade"
   },
-  "homepage": "https://aperi.io/api",
+  "homepage": "https://aperi.trade/api",
   "repository": "https://github.com/AperiAnalytics/aperi-market-research",
   "license": "MIT",
   "keywords": ["markets", "perpetuals", "research", "market-data", "api"],
@@ -21,10 +21,10 @@
         "developerName": "Aperi",
         "category": "Productivity",
         "capabilities": ["Read market data", "Read public accounts", "Explain API integration"],
-        "websiteURL": "https://aperi.io/api",
-        "supportURL": "https://aperi.io/support",
-        "privacyPolicyURL": "https://mcp.aperi.io/privacy-policy",
-        "termsOfServiceURL": "https://mcp.aperi.io/terms",
+        "websiteURL": "https://aperi.trade/api",
+        "supportURL": "https://aperi.trade/support",
+        "privacyPolicyURL": "https://mcp.aperi.trade/privacy-policy",
+        "termsOfServiceURL": "https://mcp.aperi.trade/terms",
         "defaultPrompt": [
           "Compare the available NVDA perpetual markets and their source coverage.",
           "Show the latest quote and order book for an exact Aperi market.",

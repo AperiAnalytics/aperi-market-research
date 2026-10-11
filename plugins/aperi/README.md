@@ -1,7 +1,7 @@
 # Aperi Market Research
 
-Version `0.1.1` bundles four skills with the public Aperi MCP connection at
-`https://mcp.aperi.io/mcp`. The connection uses Streamable HTTP and no
+Version `0.1.2` bundles four skills with the public Aperi MCP connection at
+`https://mcp.aperi.trade/mcp`. The connection uses Streamable HTTP and no
 authentication. No local server, wallet connection or API key is needed.
 
 The tools read products, native markets, quotes, order books, recent trades,
@@ -63,7 +63,7 @@ market read. The CLI syntax was checked with Codex `0.159.1` and Claude Code
 
 ## Claude or ChatGPT remote connection
 
-Add `https://mcp.aperi.io/mcp` in the client's custom remote MCP connection
+Add `https://mcp.aperi.trade/mcp` in the client's custom remote MCP connection
 settings, choosing no authentication. A custom connection supplies the MCP
 tools. The plugin package supplies the additional skills on hosts that support
 plugin installation; connecting the URL alone does not install the skills.
@@ -93,7 +93,7 @@ review materials and each directory's approval remain separate steps.
 
 Publisher contact: `info@aperi.trade`. Mailbox activation and email delivery
 are pending verification. Current support remains available through
-[Aperi Support](https://aperi.io/support).
+[Aperi Support](https://aperi.trade/support).
 
 The new plugin instructions and packaging are MIT licensed. Existing platform
 code, third-party data and Aperi trademarks are outside that license.

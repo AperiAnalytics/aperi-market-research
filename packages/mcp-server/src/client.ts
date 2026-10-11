@@ -1,5 +1,5 @@
 /** Fixed-destination, read-only transport. Tool arguments never supply URLs or credentials. */
-export const API_BASE = 'https://aperi.io/api/v1';
+export const API_BASE = 'https://aperi.trade/api/v1';
 export const PUBLIC_OPERATIONS = Object.freeze({
   listProducts: '/products', getProduct: '/products/{productId}',
   listMarkets: '/markets', getMarket: '/markets/{marketId}',

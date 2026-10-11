@@ -10,7 +10,7 @@
       "name": "aperi-market-research",
       "source": "./plugins/aperi",
       "description": "Research Aperi perpetual markets, public account observations and the API.",
-      "version": "0.1.1"
+      "version": "0.1.2"
     }
   ]
 }

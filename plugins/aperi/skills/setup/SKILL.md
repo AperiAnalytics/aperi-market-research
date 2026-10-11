@@ -3,7 +3,7 @@ name: setup
 description: Connect and verify the Aperi Market Research plugin or hosted MCP server when the user asks to install, connect, or troubleshoot Aperi in an AI client.
 ---
 
-Connect to `https://mcp.aperi.io/mcp` using Streamable HTTP. The hosted research server uses no authentication and needs no wallet connection, API key, app cookie or identity token.
+Connect to `https://mcp.aperi.trade/mcp` using Streamable HTTP. The hosted research server uses no authentication and needs no wallet connection, API key, app cookie or identity token.
 
 If Aperi tools are already available, call `aperi_get_health` and `aperi_get_capabilities`, then make one market read with `aperi_list_products`. Report whether the actual market read succeeded, whether coverage is partial, and which capabilities remain unavailable. A successful MCP handshake or health response alone does not verify provider data or qualify funded trading.
 

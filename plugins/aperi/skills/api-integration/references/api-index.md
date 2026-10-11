@@ -2,7 +2,7 @@
 
 Reference snapshot: 2026-10-11. All 180 documented operations from the shared API contract are indexed here. This catalogue is reference material; it does not expand the hosted plugin's public read-only permissions. Protected routes may be unavailable or unqualified in production.
 
-Base URL: `https://aperi.io/api/v1`. [Live OpenAPI](https://aperi.io/api/v1/openapi.json) · [Live Markdown](https://aperi.io/api/v1/docs.md) · [API page](https://aperi.io/api).
+Base URL: `https://aperi.trade/api/v1`. [Live OpenAPI](https://aperi.trade/api/v1/openapi.json) · [Live Markdown](https://aperi.trade/api/v1/docs.md) · [API page](https://aperi.trade/api).
 
 Source SHA-256 (developer API, workflow and key contracts in that order): `49ede3089057c62746cd99523d3334d281f6ad56ea1303e234563f4ace79bc2d`.
 

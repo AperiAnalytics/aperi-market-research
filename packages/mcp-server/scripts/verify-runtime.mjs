@@ -32,7 +32,7 @@ export default { fetch(request, env, ctx) {
   return worker.fetch(new Request(request, { headers }), env, ctx);
 } };
 ` };
-const service = 'https://mcp.aperi.io';
+const service = 'https://mcp.aperi.trade';
 const market = 'hyperliquid.xyz.NVDA.USDC';
 const wallet = '0x' + '0'.repeat(40);
 const clock = 1791742930089;
@@ -74,7 +74,7 @@ const runtime = new Miniflare({ host: '127.0.0.1', port: 0, cf: false, logReques
     try {
     const url = new URL(request.url);
     const data = fixture(url.pathname);
-    if (url.origin !== 'https://aperi.io' || request.method !== 'GET' || data === undefined || request.headers.has('authorization') || request.headers.has('cookie') || request.headers.has('x-api-key')) {
+    if (url.origin !== 'https://aperi.trade' || request.method !== 'GET' || data === undefined || request.headers.has('authorization') || request.headers.has('cookie') || request.headers.has('x-api-key')) {
       rejectedOutbound++;
       throw new Error('Isolated MCP runtime forbids non-Aperi destinations, non-GET operations and credentials');
     }
@@ -97,7 +97,7 @@ const modernMessage = (method, params = {}, id = nextId++) => ({ jsonrpc: '2.0',
 function headers(message, legacy = false) {
   // Miniflare's local bridge otherwise inserts its loopback Host; the compiled
   // Worker enforces the production authority independently of request.url.
-  return { host: 'mcp.aperi.io', 'content-type': 'application/json', accept: 'application/json, text/event-stream', 'cf-connecting-ip': '192.0.2.20', 'mcp-protocol-version': legacy ? '2025-11-25' : '2026-07-28', 'mcp-method': message.method, ...(message.params?.name || message.params?.uri ? { 'mcp-name': message.params.name ?? message.params.uri } : {}) };
+  return { host: 'mcp.aperi.trade', 'content-type': 'application/json', accept: 'application/json, text/event-stream', 'cf-connecting-ip': '192.0.2.20', 'mcp-protocol-version': legacy ? '2025-11-25' : '2026-07-28', 'mcp-method': message.method, ...(message.params?.name || message.params?.uri ? { 'mcp-name': message.params.name ?? message.params.uri } : {}) };
 }
 async function bounded(work, milliseconds = 5000) {
   let timer;
@@ -157,7 +157,7 @@ try {
     assert.equal(output.data.price, price, name);
     assert.equal(output.data.sourceTime, clock, name);
     assert.equal(output.data.financialAuthority, false, name);
-    assert.equal(output.provenance.api, 'https://aperi.io/api/v1');
+    assert.equal(output.provenance.api, 'https://aperi.trade/api/v1');
     if (name === 'aperi_list_products') { assert.equal(output.data.products.length, 2); assert.equal(output.pagination.total, 12); assert.equal(output.pagination.nextOffset, 2); }
     if (name === 'aperi_read_public_account') { assert.equal(output.data.account.positions.length, 2); assert.equal(output.truncatedCollections[0].total, 8); }
     if (name === 'aperi_get_calendar') { assert.equal(output.data.status, 'partial'); assert.equal(output.data.sources.economic.status, 'unavailable'); }
@@ -189,6 +189,9 @@ try {
   await send('credential header is refused at public ingress', modernMessage('tools/list'), { expected: 400, extraHeaders: { authorization: 'Bearer isolated-refused-secret' } });
   await send('compiled production Host guard remains active', modernMessage('tools/list'), { expected: 403, extraHeaders: { 'x-fixture-host': 'foreign.example.invalid' } });
   await send('foreign Origin is refused at public ingress', modernMessage('tools/list'), { expected: 403, extraHeaders: { origin: 'https://foreign.example.invalid' } });
+  await send('retired MCP authority is refused', modernMessage('tools/list'), { expected: 403, extraHeaders: { 'x-fixture-host': 'mcp.aperi.io' } });
+  await send('retired app Origin is refused', modernMessage('tools/list'), { expected: 403, extraHeaders: { origin: 'https://aperi.io' } });
+  await send('retired MCP Origin is refused', modernMessage('tools/list'), { expected: 403, extraHeaders: { origin: 'https://mcp.aperi.io' } });
   await send('modern header/body mismatch is refused by compiled SDK', modernMessage('tools/list'), { expected: 400, extraHeaders: { 'mcp-method': 'tools/call' } });
   const missingResource = await send('unknown resource produces a protocol error, never network I/O', modernMessage('resources/read', { uri: 'https://foreign.example.invalid/collect' }));
   assert.ok(missingResource.error);
@@ -201,13 +204,13 @@ try {
   for (const body of parallel) assert.equal(body.result.structuredContent.data.quote.price, price);
   const streamRefusal = await send('compiled server refuses subscription streams', modernMessage('subscriptions/listen'));
   assert.equal(streamRefusal.error.code, -32601);
-  const health = await entry.fetch(service + '/health', { method: 'GET', headers: { host: 'mcp.aperi.io' } });
+  const health = await entry.fetch(service + '/health', { method: 'GET', headers: { host: 'mcp.aperi.trade' } });
   assert.equal(health.status, 200);
   assert.equal((await health.json()).financialAuthority, false);
   cases.push({ label: 'compiled health declares absent financial authority', httpStatus: 200, protocol: null, contentType: health.headers.get('content-type'), errorCode: null, requestId: health.headers.get('x-request-id') });
   assert.equal(rejectedOutbound, 0);
   const receipt = { observedAt: new Date().toISOString(), environment: 'isolated local Workerd with frozen compiled MCP Worker; exact production rate-limit bindings; mocked fixed-origin Aperi GET data', harnessAuthorityNormalization: 'Local bridge Host is restored from the controlled production request URL and Origin delivered inside the isolated fixture entry; hostile Host and Origin overrides are independently refused by the unchanged compiled Worker.', bundleSha256: createHash('sha256').update(compiled).digest('hex'), passed: true, caseCount: cases.length, toolCount: Object.keys(tools).length, documentedOperationCount: index.operationCount, cases, outboundFixtureCalls: outbound.length, outboundOperations: [...new Set(outbound.map(call => call.method + ' ' + call.path))].sort(), unexpectedOutboundAttempts: rejectedOutbound, realNetworkCalls: 0, productionOperations: 0, financialAuthority: false, liveFlagsModified: false, credentialsRecorded: false, marketPriceAndClockPreserved: true, publicAccountCacheBypassed: true, modernAndLegacyResponsesComplete: true, parallelRequests: parallel.length, quotaNote: 'Cloudflare binding limits are per location abuse controls, not globally atomic counters.' };
-  const output = new URL('../../../docs/evidence/local/mcp-plugin-runtime-2026-10-11/runtime.json', import.meta.url);
+  const output = new URL('../../../docs/evidence/local/mcp-domain-migration-2026-10-12/runtime.json', import.meta.url);
   await mkdir(new URL('.', output), { recursive: true });
   await writeFile(output, JSON.stringify(receipt, null, 2) + '\n');
   console.log(JSON.stringify({ passed: true, caseCount: cases.length, toolCount: 16, bundleSha256: receipt.bundleSha256, outfile: output.pathname, outboundFixtureCalls: outbound.length, realNetworkCalls: 0 }));

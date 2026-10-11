@@ -3,9 +3,9 @@ name: api-integration
 description: Explain or build client integrations for Aperi's documented REST API and MCP tools when the user asks about endpoint schemas, authentication, exact market identifiers, key restrictions or safe integration behavior.
 ---
 
-The production REST base is `https://aperi.io/api/v1`; the hosted public MCP endpoint is `https://mcp.aperi.io/mcp`. Match the user's requested interface. Use the advertised MCP schemas for tool calls and the REST operation's own schema for client code. The plugin provides individually declared public read-only tools, not a generic executor.
+The production REST base is `https://aperi.trade/api/v1`; the hosted public MCP endpoint is `https://mcp.aperi.trade/mcp`. Match the user's requested interface. Use the advertised MCP schemas for tool calls and the REST operation's own schema for client code. The plugin provides individually declared public read-only tools, not a generic executor.
 
-For a REST integration, open [the complete operation index](references/api-index.md), find the operation ID, and load its linked section reference. The bundled snapshot covers all 180 documented operations, including protected routes that this MCP does not execute. Check [live OpenAPI](https://aperi.io/api/v1/openapi.json) or [live Markdown](https://aperi.io/api/v1/docs.md) when current behavior or a changed schema matters. Documentation examples are illustrative and are never live account, market or settlement evidence.
+For a REST integration, open [the complete operation index](references/api-index.md), find the operation ID, and load its linked section reference. The bundled snapshot covers all 180 documented operations, including protected routes that this MCP does not execute. Check [live OpenAPI](https://aperi.trade/api/v1/openapi.json) or [live Markdown](https://aperi.trade/api/v1/docs.md) when current behavior or a changed schema matters. Documentation examples are illustrative and are never live account, market or settlement evidence.
 
 Keep these authentication boundaries explicit:
 

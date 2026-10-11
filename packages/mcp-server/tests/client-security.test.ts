@@ -38,7 +38,7 @@ test('resource IDs cannot escape the fixed destination or introduce path travers
   }
   const url = operationUrl('getQuote', { marketId: MARKET, url: 'https://attacker.example', authorization: 'secret', cookie: 'session=secret' });
   assert.equal(url.href, `${API_BASE}/markets/${MARKET}/quote`);
-  assert.equal(url.origin, 'https://aperi.io');
+  assert.equal(url.origin, 'https://aperi.trade');
   assert.equal(url.username + url.password + url.search + url.hash, '');
 });
 

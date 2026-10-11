@@ -3,7 +3,7 @@ import test from 'node:test';
 import { handleRequest, type Env } from '../src/worker.ts';
 import { AperiPublicClient } from '../src/client.ts';
 
-const ENDPOINT = 'https://mcp.aperi.io/mcp';
+const ENDPOINT = 'https://mcp.aperi.trade/mcp';
 const IP = '192.0.2.15';
 const VERSION = '2026-07-28';
 type Json = Record<string, any>;
@@ -43,12 +43,12 @@ async function bounded<T>(work: Promise<T>, milliseconds = 350): Promise<T> {
 
 test('TLS, authority, encoded-path and query checks prevent alternative ingress destinations', async () => {
   const f = fixture();
-  for (const endpoint of ['http://mcp.aperi.io/mcp', 'https://attacker.example/mcp', 'https://mcp.aperi.io:8443/mcp', 'https://mcp.aperi.io/mcp?api_key=secret', 'https://mcp.aperi.io/mcp#fragment']) {
+  for (const endpoint of ['http://mcp.aperi.trade/mcp', 'https://attacker.example/mcp', 'https://mcp.aperi.trade:8443/mcp', 'https://mcp.aperi.trade/mcp?api_key=secret', 'https://mcp.aperi.trade/mcp#fragment']) {
     const response = await handleRequest(request(message(), {}, endpoint), f.env, f.client);
     assert.ok(response.status >= 400, endpoint);
   }
   assert.equal((await handleRequest(request(message(), { headers: { host: 'attacker.example' } }), f.env, f.client)).status, 403);
-  assert.ok((await handleRequest(request(message(), {}, 'https://mcp.aperi.io/%6dcp'), f.env, f.client)).status >= 400);
+  assert.ok((await handleRequest(request(message(), {}, 'https://mcp.aperi.trade/%6dcp'), f.env, f.client)).status >= 400);
   assert.equal(f.calls.api.length, 0);
 });
 
@@ -60,6 +60,17 @@ test('legacy TLS metadata is refused independently of the HTTPS URL', async () =
     assert.equal((await handleRequest(input, f.env, f.client)).status, 403);
   }
   assert.equal(f.calls.ip.length, 0);
+});
+
+test('retired Aperi destinations and browser origins cannot enter the migrated MCP', async () => {
+  const f = fixture();
+  assert.equal((await handleRequest(request(message(), {}, 'https://mcp.aperi.io/mcp'), f.env, f.client)).status, 403);
+  assert.equal((await handleRequest(request(message(), { headers: { host: 'mcp.aperi.io' } }), f.env, f.client)).status, 403);
+  for (const origin of ['https://aperi.io', 'https://mcp.aperi.io']) {
+    assert.equal((await handleRequest(request(message(), { headers: { origin } }), f.env, f.client)).status, 403);
+  }
+  assert.equal(f.calls.ip.length, 0);
+  assert.equal(f.calls.api.length, 0);
 });
 
 test('Origin validation rejects malicious and null origins before quota or protocol work', async () => {
@@ -216,7 +227,7 @@ test('modern tool JSON stays readable after request-scoped handler cleanup', asy
   const body = await bounded(rpc(response));
   assert.equal(body.result.structuredContent.ok, true);
   assert.equal(body.result.structuredContent.data.price, '123.0000000001');
-  assert.deepEqual(f.calls.api, ['https://aperi.io/api/v1/health']);
+  assert.deepEqual(f.calls.api, ['https://aperi.trade/api/v1/health']);
 });
 
 test('legacy initialization, discovery and tool SSE streams finish after complete results', async () => {
