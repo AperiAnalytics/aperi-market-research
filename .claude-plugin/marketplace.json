@@ -1,0 +1,15 @@
+{
+  "name": "aperi-plugins",
+  "description": "Aperi market research tools and API integration skills.",
+  "owner": {
+    "name": "Aperi"
+  },
+  "plugins": [
+    {
+      "name": "aperi-market-research",
+      "source": "./plugins/aperi",
+      "description": "Research Aperi perpetual markets, public account observations and the API.",
+      "version": "0.1.0"
+    }
+  ]
+}

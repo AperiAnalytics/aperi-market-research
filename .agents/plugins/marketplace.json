@@ -1,0 +1,20 @@
+{
+  "name": "aperi-plugins",
+  "interface": {
+    "displayName": "Aperi Plugins"
+  },
+  "plugins": [
+    {
+      "name": "aperi-market-research",
+      "source": {
+        "source": "local",
+        "path": "./plugins/aperi"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

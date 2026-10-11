@@ -1,0 +1,92 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "aperi-market-research",
+  "version": "0.1.0",
+  "description": "Research Aperi perpetual markets, inspect public account observations, and understand the documented Aperi API.",
+  "author": {
+    "name": "Aperi",
+    "url": "https://aperi.io"
+  },
+  "homepage": "https://aperi.io/api",
+  "repository": "https://github.com/AperiAnalytics/aperi-market-research",
+  "license": "MIT",
+  "keywords": ["markets", "perpetuals", "research", "market-data", "api"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Aperi Market Research",
+        "shortDescription": "Explore live perpetual markets",
+        "longDescription": "Find products and native markets on Aperi, read quotes, order books, recent trades and candles, inspect a public wallet address supplied by the user, and review calendar, leaderboard and platform coverage. Results preserve venue identity, unavailable data and source freshness. Includes setup, market research, public account and API integration skills. The hosted connection is public and read-only; it does not access a private Aperi account, save watchlists, manage keys, sign wallet messages, place orders or transfer funds.",
+        "developerName": "Aperi",
+        "category": "Productivity",
+        "capabilities": ["Read market data", "Read public accounts", "Explain API integration"],
+        "websiteURL": "https://aperi.io/api",
+        "supportURL": "https://aperi.io/support",
+        "privacyPolicyURL": "https://mcp.aperi.io/privacy-policy",
+        "termsOfServiceURL": "https://mcp.aperi.io/terms",
+        "defaultPrompt": [
+          "Compare the available NVDA perpetual markets and their source coverage.",
+          "Show the latest quote and order book for an exact Aperi market.",
+          "Explain how to integrate Aperi's public market API."
+        ],
+        "brandColor": "#1B272E",
+        "brandColorDark": "#32A7A2",
+        "composerIcon": "./assets/icon.svg",
+        "logo": "./assets/icon.svg"
+      },
+      "onboardingSkill": "./skills/setup/SKILL.md",
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Discover a canonical product and its native contracts",
+              "prompt": "Find the NVDA perpetual products available on Aperi and show their selected venue and coverage.",
+              "tools_triggered": "aperi_list_products, aperi_get_product",
+              "expected_behavior": "Use returned canonical product IDs; report selected and candidate native market identities, current source coverage and unavailable fields without claiming execution permission."
+            },
+            {
+              "description": "Read the quote for an exact native market",
+              "prompt": "Find a Hyperliquid NVDA perpetual on Aperi and show its current quote with the source time and units.",
+              "tools_triggered": "aperi_list_markets, aperi_get_market, aperi_get_quote",
+              "expected_behavior": "Select an exact returned Hyperliquid market ID, preserve its venue and collateral, return observed quote data and explain partial or unavailable provider data."
+            },
+            {
+              "description": "Inspect native order-book liquidity",
+              "prompt": "Find an Aperi market with native order-book support and show its observed bids, asks and recent trades.",
+              "tools_triggered": "aperi_list_markets, aperi_get_order_book, aperi_get_recent_trades",
+              "expected_behavior": "Read only the selected native market, keep price and size units, report source freshness, and avoid constructing an order book or trade tape for unsupported oracle instruments."
+            },
+            {
+              "description": "Read bounded historical candles",
+              "prompt": "Find an Aperi Hyperliquid perpetual and show up to 20 recent one-hour candles from that same native market.",
+              "tools_triggered": "aperi_list_markets, aperi_get_candles",
+              "expected_behavior": "Use the exact discovered native ID, a bounded supported interval and window, explain candle time in Unix seconds, and retain the original venue if history is unavailable."
+            },
+            {
+              "description": "Inspect platform and calendar coverage",
+              "prompt": "Check Aperi's declared capabilities and this week's calendar; clearly explain unavailable feeds and trading qualification.",
+              "tools_triggered": "aperi_get_capabilities, aperi_get_platform_status, aperi_get_calendar",
+              "expected_behavior": "Return observed capability and calendar coverage; describe unavailable feeds as unavailable, and distinguish service configuration from actual funded trading qualification."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Investment execution is outside the public plugin",
+              "prompt": "Open a 10x leveraged NVDA position for me now."
+            },
+            {
+              "description": "Transfers are outside the public plugin",
+              "prompt": "Transfer 100 USDC from my Aperi wallet to another address."
+            },
+            {
+              "description": "Private app settings are outside the public plugin",
+              "prompt": "Create an API key on my Aperi account and save NVDA to my watchlist."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "This public research plugin does not sell products, process payments, place investment trades or transfer funds."
+      }
+    }
+  }
+}
